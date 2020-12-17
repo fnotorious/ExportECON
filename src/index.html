@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+      @font-face {
+        font-family: coolvetica;
+        src: url(../design/coolvetica.rg.woff);
+      }
+
+      h2 {
+        font-family: coolvetica;
+        color: #77ccff;
+        font-weight: 200;
+        font-size: 35px;
+      }
+
+      .logo {
+        display: inline-block;
+        margin: 4px 2px;
+        position: relative;
+        top: 100px;
+      }
+
+      .logo-design {
+        top: -30px;
+      }
+    </style>
   </head>
+  <title>ExportECON</title>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <script>
+      const ElectronTitlebarWindows = require('electron-titlebar-windows');
+      const titlebar = new ElectronTitlebarWindows({backgroundColor: '#77ccff', draggable: true, fullscreen: false});
+
+      titlebar.appendTo();
+
+      titlebar.on('close', function(e) {
+        window.close();
+      });
+
+      titlebar.on('minimize', function(e) {
+        window.minimize();
+      });
+
+      titlebar.on('maximize', function(e) {
+        console.log('maximize');
+      });
+
+      titlebar.on('fullscreen', function(e) {
+        console.log('fullscreen');
+      });
+
+    </script>
+    <div class="logo-design">
+      <img class="logo" src="homepage-design-CHRISTMAS-PNG.png">
+      <h2>Comparing trade between nations</h2>
+    </div>
   </body>
 </html>
