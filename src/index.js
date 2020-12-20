@@ -14,6 +14,7 @@ const createWindow = () => {
     icon: path.join(__dirname, '../design/fixed.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true
     }
   });
 
