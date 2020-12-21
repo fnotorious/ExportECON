@@ -217,11 +217,13 @@
         #capital1 {
           left: 1210px;
           top: 180px;
+          text-transform: uppercase;
         }
 
         #capital2 {
           left: 270px;
           top: 180px;
+          text-transform: uppercase;
         }
 
         .nation-currency {
@@ -235,11 +237,13 @@
         #currency1 {
           left: 1210px;
           top: 215px;
+          text-transform: uppercase;
         }
 
         #currency2 {
           left: 270px;
           top: 215px;
+          text-transform: uppercase;
         }
 
         .flag-img {
@@ -447,9 +451,6 @@
 
           else {
             localStorage.clear()
-            $.getScript("transfer.js", function(e) {
-              transferInfo($("#country").val(), $("#country2").val()) ;
-            })
             localStorage.setItem("country1", $("#country").val())
             localStorage.setItem("country2", $("#country2").val())
             localStorage.setItem("id1", $("#country option:selected").attr('id'))
@@ -465,6 +466,21 @@
         var secondCountryName = localStorage.getItem("country2")
         var firstCountryFlag = "flags/" + localStorage.getItem("id1") + ".png"
         var secondCountryFlag = "flags/" + localStorage.getItem("id2") + ".png"
+        var firstData;
+        var secondData;
+
+        $.getScript("transfer.js", function(e) {
+          async function afunction()
+          {
+            firstData = await transferInfo(firstCountryName) ;
+            secondData = await transferInfo(secondCountryName) ;
+            $('#capital2').html("CAPITAL: " + firstData[0]);
+            $('#capital1').html("CAPITAL: " + secondData[0]);
+            $('#currency2').html("CURRENCY: " + firstData[1]);
+            $('#currency1').html("CURRENCY: " + secondData[1]);
+          }
+          afunction();
+        })
 
         $("#name1").html(firstCountryName);
         $("#name2").html(secondCountryName);
@@ -583,7 +599,7 @@
             <option id="pt" value="Portugal">Portugal</option>
             <option id="qa" value="Qatar">Qatar</option>
             <option id="ro" value="Romania">Romania</option>
-            <option id="ru" value="Russia">Russian</option>
+            <option id="ru" value="Russia">Russia</option>
             <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
             <option id="sn" value="Senegal">Senegal</option>
             <option id="rs" value="Serbia">Serbia</option>
@@ -596,6 +612,7 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -724,7 +741,7 @@
             <option id="pt" value="Portugal">Portugal</option>
             <option id="qa" value="Qatar">Qatar</option>
             <option id="ro" value="Romania">Romania</option>
-            <option id="ru" value="Russia">Russian</option>
+            <option id="ru" value="Russia">Russia</option>
             <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
             <option id="sn" value="Senegal">Senegal</option>
             <option id="rs" value="Serbia">Serbia</option>
@@ -737,6 +754,7 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -767,15 +785,15 @@
       <div class="graph-split"></div>
       <div id="flag1" class="flag-display"></div>
       <div id="flag2" class="flag-display"></div>
-      <img id="first-flag" class="flag-img" src="flags/ro.png">
-      <img id="second-flag" class="flag-img" src="flags/al.png">
+      <img id="first-flag" class="flag-img" src="">
+      <img id="second-flag" class="flag-img" src="">
       <div class="graph-info">
         <h1 id="name1" class="nation-name"></h1>
         <h1 id="name2" class="nation-name"></h1>
-        <h1 id="capital1" class="nation-capital">CAPITAL: TIRANA</h1>
-        <h1 id="capital2" class="nation-capital">CAPITAL: BUCHAREST</h1>
-        <h1 id="currency1" class="nation-currency">CURRENCY: LEK (ALL)</h1>
-        <h1 id="currency2" class="nation-currency">CURRENCY: LEU (RON)</h1>
+        <h1 id="capital1" class="nation-capital">CAPITAL: DEFAULT</h1>
+        <h1 id="capital2" class="nation-capital">CAPITAL: DEFAULT</h1>
+        <h1 id="currency1" class="nation-currency">CURRENCY: DEFAULT</h1>
+        <h1 id="currency2" class="nation-currency">CURRENCY: DEFAULT</h1>
         <h1 id="export-makeup">Export Makeup</h1>
         <h1 id="export-makeup2">Export Makeup</h1>
         <div id="color-symbol1" class="color-symbols">

@@ -216,9 +216,6 @@
 
           else {
             document.getElementById("error").innerHTML = ""
-            $.getScript("transfer.js", function(e) {
-              transferInfo($("#country").val(), $("#country2").val()) ;
-            })
             localStorage.setItem("country1", $("#country").val())
             localStorage.setItem("country2", $("#country2").val())
             localStorage.setItem("id1", $("#country option:selected").attr('id'))
@@ -342,7 +339,7 @@
               <option id="pt" value="Portugal">Portugal</option>
               <option id="qa" value="Qatar">Qatar</option>
               <option id="ro" value="Romania">Romania</option>
-              <option id="ru" value="Russia">Russian</option>
+              <option id="ru" value="Russia">Russia</option>
               <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
               <option id="sn" value="Senegal">Senegal</option>
               <option id="rs" value="Serbia">Serbia</option>
@@ -355,6 +352,7 @@
               <option id="sz" value="Eswatini">Swaziland</option>
               <option id="se" value="Sweden">Sweden</option>
               <option id="ch" value="Switzerland">Switzerland</option>
+              <option id="sy" value="Syria">Syria</option>
               <option id="tj" value="Tajikistan">Tajikistan</option>
               <option id="tz" value="Tanzania">Tanzania</option>
               <option id="th" value="Thailand">Thailand</option>
@@ -483,7 +481,7 @@
             <option id="pt" value="Portugal">Portugal</option>
             <option id="qa" value="Qatar">Qatar</option>
             <option id="ro" value="Romania">Romania</option>
-            <option id="ru" value="Russia">Russian</option>
+            <option id="ru" value="Russia">Russia</option>
             <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
             <option id="sn" value="Senegal">Senegal</option>
             <option id="rs" value="Serbia">Serbia</option>
@@ -496,6 +494,7 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>

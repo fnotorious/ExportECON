@@ -45,11 +45,16 @@
     }
   },
   "dependencies": {
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
     "custom-electron-titlebar": "^3.2.5",
     "electron-squirrel-startup": "^1.0.0",
     "electron-titlebar-windows": "^3.0.0",
     "jquery": "^3.5.1",
+    "puppeteer": "^5.5.0",
     "python-shell": "^2.0.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "requirejs": "^2.3.6"
   },
   "devDependencies": {
