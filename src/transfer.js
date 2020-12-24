@@ -23,11 +23,6 @@ async function transferInfo(country)
     country = "Papa New Guinea";
   }
 
-  if (country === "Côte d'Ivoire")
-  {
-    country = "Ivory Coast";
-  }
-
   if (country === "Eswatini")
   {
     country = "Swaziland";

@@ -402,7 +402,7 @@
         #export-makeup {
           position: absolute;
           top: 280px;
-          left: 400px;
+          left: 280px;
           font-size: 30px;
           font-weight: 500;
           font-family: bahnschrift;
@@ -412,11 +412,23 @@
         #export-makeup2 {
           position: absolute;
           top: 280px;
-          right: 380px;
+          right: 260px;
           font-size: 30px;
           font-weight: 500;
           font-family: bahnschrift;
           color: #a8a8a8;
+        }
+
+        #container {
+          position: absolute;
+          left: 105px;
+          top: 330px;
+        }
+
+        #container2 {
+          position: absolute;
+          right: 105px;
+          top: 330px;
         }
     </style>
   </head>
@@ -484,8 +496,8 @@
 
         $("#name1").html(firstCountryName);
         $("#name2").html(secondCountryName);
-        $("#first-flag").attr("src", firstCountryFlag)
-        $("#second-flag").attr("src", secondCountryFlag)
+        $("#first-flag").attr("src", firstCountryFlag);
+        $("#second-flag").attr("src", secondCountryFlag);
     });
     </script>
     <script src="./transfer.js"></script>
@@ -524,7 +536,6 @@
             <option id="km" value="Comoros">Comoros</option>
             <option id="cg" value="Republic of the Congo">Republic of the Congo</option>
             <option id="cd" value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
-            <option id="ci" value="⁨Côte d'Ivoire">⁨Côte d'Ivoire</option>
             <option id="cr" value="Costa Rica">Costa Rica</option>
             <option id="hr" value="Croatia">Croatia</option>
             <option id="cu" value="Cuba">Cuba</option>
@@ -612,7 +623,6 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
-            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -666,7 +676,6 @@
             <option id="km" value="Comoros">Comoros</option>
             <option id="cg" value="Republic of the Congo">Republic of the Congo</option>
             <option id="cd" value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
-            <option id="ci" value="⁨Côte d'Ivoire">⁨Côte d'Ivoire</option>
             <option id="cr" value="Costa Rica">Costa Rica</option>
             <option id="hr" value="Croatia">Croatia</option>
             <option id="cu" value="Cuba">Cuba</option>
@@ -754,7 +763,6 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
-            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -785,17 +793,17 @@
       <div class="graph-split"></div>
       <div id="flag1" class="flag-display"></div>
       <div id="flag2" class="flag-display"></div>
-      <img id="first-flag" class="flag-img" src="">
-      <img id="second-flag" class="flag-img" src="">
+      <img id="first-flag" class="flag-img">
+      <img id="second-flag" class="flag-img">
       <div class="graph-info">
         <h1 id="name1" class="nation-name"></h1>
         <h1 id="name2" class="nation-name"></h1>
-        <h1 id="capital1" class="nation-capital">CAPITAL: DEFAULT</h1>
-        <h1 id="capital2" class="nation-capital">CAPITAL: DEFAULT</h1>
-        <h1 id="currency1" class="nation-currency">CURRENCY: DEFAULT</h1>
-        <h1 id="currency2" class="nation-currency">CURRENCY: DEFAULT</h1>
-        <h1 id="export-makeup">Export Makeup</h1>
-        <h1 id="export-makeup2">Export Makeup</h1>
+        <h1 id="capital1" class="nation-capital">CAPITAL: LOADING...</h1>
+        <h1 id="capital2" class="nation-capital">CAPITAL: LOADING...</h1>
+        <h1 id="currency1" class="nation-currency">CURRENCY: LOADING...</h1>
+        <h1 id="currency2" class="nation-currency">CURRENCY: LOADING...</h1>
+        <h1 id="export-makeup">Latest Export Makeup Data (2018)</h1>
+        <h1 id="export-makeup2">Latest Export Makeup Data (2018)</h1>
         <div id="color-symbol1" class="color-symbols">
           <div>
             <div id="color1" class="color"></div>
@@ -844,5 +852,213 @@
         </div>
       </div>
     </div>
+    <script language = "JavaScript">
+       $(document).ready(function() {
+          var Highcharts = require('highcharts');
+          require('highcharts/modules/exporting')(Highcharts);
+          require('highcharts/highcharts-3d')(Highcharts);
+
+          var firstNationData;
+          var services = 0.0 ;
+          var textiles = 0.0 ;
+          var agriculture = 0.0 ;
+          var stone = 0.0 ;
+          var minerals = 0.0 ;
+          var metals = 0.0 ;
+          var chemicals = 0.0 ;
+          var vehicles = 0.0 ;
+          var machinery = 0.0 ;
+          var electronics = 0.0 ;
+          var other = 0.0 ;
+
+          $.getScript("csvdata.js", function(e) {
+            async function afunction()
+            {
+              firstNationData = await getData("csv/What did " + localStorage.getItem("country1") + " export in 2018_.csv") ;
+              services = parseFloat(firstNationData[0]) ;
+              textiles = parseFloat(firstNationData[1]) ;
+              agriculture = parseFloat(firstNationData[2]) ;
+              stone = parseFloat(firstNationData[3]) ;
+              minerals = parseFloat(firstNationData[4]) ;
+              metals = parseFloat(firstNationData[5]) ;
+              chemicals = parseFloat(firstNationData[6]) ;
+              vehhicles = parseFloat(firstNationData[7]) ;
+              machinery = parseFloat(firstNationData[8]) ;
+              electronics = parseFloat(firstNationData[9]) ;
+              other = parseFloat(firstNationData[10]) ;
+
+              Highcharts.setOptions({
+               colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
+               exporting: {
+                 enabled: false
+               },
+               credits: {
+                 enabled: false
+               }
+              });
+
+              var chart = {
+                 type: 'pie',
+                 options3d: {
+                   enabled: true,
+                   alpha: 45,
+                   beta: 0
+                 },
+                 backgroundColor: 'transparent'
+              };
+              var title = {
+                 text: ''
+              };
+              var tooltip = {
+                 pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+              };
+              var plotOptions = {
+                 pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 45,
+
+                    dataLabels: {
+                       enabled: true,
+                       format: '{point.name}'
+                    }
+                 }
+              };
+              var series = [{
+                 type: 'pie',
+                 name: 'Export makeup',
+                 data: [
+                    ['Services',   services],
+                    ['Textiles',       textiles],
+                    ['Agriculture',       agriculture],
+                    ['Stone',       stone],
+                    ['Minerals',       minerals],
+                    ['Metals',       metals],
+                    ['Chemicals',       chemicals],
+                    ['Vehicles',       parseFloat(firstNationData[7])],
+                    ['Machinery',       machinery],
+                    ['Electronics',       electronics],
+                    ['Other',       other],
+                 ]
+              }];
+
+              var json = {};
+              json.chart = chart;
+              json.title = title;
+              json.tooltip = tooltip;
+              json.plotOptions = plotOptions;
+              json.series = series;
+              $('#container').highcharts(json);
+            }
+
+            afunction();
+          })
+       });
+    </script>
+    <script language = "JavaScript">
+       $(document).ready(function() {
+          var Highcharts = require('highcharts');
+          require('highcharts/modules/exporting')(Highcharts);
+          require('highcharts/highcharts-3d')(Highcharts);
+
+          var firstNationData;
+          var services = 0.0 ;
+          var textiles = 0.0 ;
+          var agriculture = 0.0 ;
+          var stone = 0.0 ;
+          var minerals = 0.0 ;
+          var metals = 0.0 ;
+          var chemicals = 0.0 ;
+          var vehicles = 0.0 ;
+          var machinery = 0.0 ;
+          var electronics = 0.0 ;
+          var other = 0.0 ;
+
+          $.getScript("csvdata.js", function(e) {
+            async function afunction()
+            {
+              firstNationData = await getData("csv/What did " + localStorage.getItem("country2") + " export in 2018_.csv") ;
+              services = parseFloat(firstNationData[0]) ;
+              textiles = parseFloat(firstNationData[1]) ;
+              agriculture = parseFloat(firstNationData[2]) ;
+              stone = parseFloat(firstNationData[3]) ;
+              minerals = parseFloat(firstNationData[4]) ;
+              metals = parseFloat(firstNationData[5]) ;
+              chemicals = parseFloat(firstNationData[6]) ;
+              vehhicles = parseFloat(firstNationData[7]) ;
+              machinery = parseFloat(firstNationData[8]) ;
+              electronics = parseFloat(firstNationData[9]) ;
+              other = parseFloat(firstNationData[10]) ;
+
+              Highcharts.setOptions({
+               colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
+               exporting: {
+                 enabled: false
+               },
+               credits: {
+                 enabled: false
+               }
+              });
+
+              var chart = {
+                 type: 'pie',
+                 options3d: {
+                   enabled: true,
+                   alpha: 45,
+                   beta: 0
+                 },
+                 backgroundColor: 'transparent'
+              };
+              var title = {
+                 text: ''
+              };
+              var tooltip = {
+                 pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+              };
+              var plotOptions = {
+                 pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 45,
+
+                    dataLabels: {
+                       enabled: true,
+                       format: '{point.name}'
+                    }
+                 }
+              };
+              var series = [{
+                 type: 'pie',
+                 name: 'Export makeup',
+                 data: [
+                    ['Services',   services],
+                    ['Textiles',       textiles],
+                    ['Agriculture',       agriculture],
+                    ['Stone',       stone],
+                    ['Minerals',       minerals],
+                    ['Metals',       metals],
+                    ['Chemicals',       chemicals],
+                    ['Vehicles',       parseFloat(firstNationData[7])],
+                    ['Machinery',       machinery],
+                    ['Electronics',       electronics],
+                    ['Other',       other],
+                 ]
+              }];
+
+              var json = {};
+              json.chart = chart;
+              json.title = title;
+              json.tooltip = tooltip;
+              json.plotOptions = plotOptions;
+              json.series = series;
+              $('#container2').highcharts(json);
+            }
+
+            afunction();
+          })
+       });
+    </script>
+    <div id = "container" style = "width: 770px; height: 560px; margin: 0 auto"></div>
+    <div id = "container2" style = "width: 770px; height: 560px; margin: 0 auto"></div>
   </body>
 </html>
