@@ -275,7 +275,7 @@
 
         #color-symbol1 {
           left: 630px;
-          bottom: 150px;
+          bottom: 170px;
         }
 
         .color {
@@ -483,7 +483,7 @@
               cursor: pointer;
               border-radius: 50px;
               transition: all 0.5s;
-              top: 130px;
+              top: 200px;
               right: 40px;
               position: absolute;
               font-family: bahnschrift;
@@ -519,6 +519,16 @@
               color: #a8a8a8;
             }
 
+            #discretion {
+              position: absolute;
+              bottom: 40px;
+              left: 440px;
+              font-size: 17px;
+              font-weight: 500;
+              font-family: bahnschrift;
+              color: #a8a8a8;
+            }
+
             .import-button {
               background-color: #e5e5e5;
               border: none;
@@ -534,7 +544,7 @@
               border-radius: 50px;
               transition: all 0.5s;
               top: 130px;
-              right: 100px;
+              right: 40px;
               position: absolute;
               font-family: bahnschrift;
               font-weight: 1000;
@@ -624,6 +634,17 @@
 
         $("#name1").html(firstCountryName);
         $("#name2").html(secondCountryName);
+
+        if (firstCountryName === "Democratic Republic of the Congo")
+        {
+          $("#name1").html("D. Republic of the Congo");
+        }
+
+        if (secondCountryName === "Democratic Republic of the Congo")
+        {
+          $("#name2").html("D. Republic of the Congo");
+        }
+
         $("#first-flag").attr("src", firstCountryFlag);
         $("#second-flag").attr("src", secondCountryFlag);
     });
@@ -1533,6 +1554,7 @@
     <button class="moreinfo-button">Next</button>
     <button class="help-button">?</button>
     <button class="import-button">Exports</button>
+    <h1 id="discretion">DISCRETION: trade data from some countries may contain a significant degree of error, due to limited, delayed, or inaccurate reporting.<h1>
     <h1 id="citation">Data From The Growth Lab at Harvard University. The Atlas of Economic Complexity. http://www.atlas.cid.harvard.edu.<h1>
   </body>
 </html>
