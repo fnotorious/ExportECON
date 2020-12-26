@@ -608,6 +608,11 @@
             window.location.href = "datapage.html";
           }
         })
+
+        $(".help-button").click(function(e){
+          e.preventDefault();
+          window.location.href = "help.html";
+        })
     });
     </script>
     <script>
@@ -711,6 +716,7 @@
             <option id="in" value="India">India</option>
             <option id="id" value="Indonesia">Indonesia</option>
             <option id="ir" value="Iran">Iran</option>
+            <option id="iq" value="Iraq">Iraq</option>
             <option id="ie" value="Ireland">Ireland</option>
             <option id="il" value="Israel">Israel</option>
             <option id="it" value="Italy">Italy</option>
@@ -772,6 +778,7 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -851,6 +858,7 @@
             <option id="in" value="India">India</option>
             <option id="id" value="Indonesia">Indonesia</option>
             <option id="ir" value="Iran">Iran</option>
+            <option id="iq" value="Iraq">Iraq</option>
             <option id="ie" value="Ireland">Ireland</option>
             <option id="il" value="Israel">Israel</option>
             <option id="it" value="Italy">Italy</option>
@@ -912,6 +920,7 @@
             <option id="sz" value="Eswatini">Swaziland</option>
             <option id="se" value="Sweden">Sweden</option>
             <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
             <option id="tj" value="Tajikistan">Tajikistan</option>
             <option id="tz" value="Tanzania">Tanzania</option>
             <option id="th" value="Thailand">Thailand</option>
@@ -1076,7 +1085,7 @@
               };
               var series = [{
                  type: 'pie',
-                 name: 'Export makeup',
+                 name: 'Share of exports',
                  data: [
                     ['Services',   parseFloat(firstNationData[0])],
                     ['Textiles',       textiles],
@@ -1166,7 +1175,7 @@
                   };
                   var series = [{
                      type: 'pie',
-                     name: 'Import makeup',
+                     name: 'Share of imports',
                      data: [
                         ['Services',   parseFloat(firstNationData[0])],
                         ['Textiles',       textiles],
@@ -1245,7 +1254,7 @@
                   };
                   var series = [{
                      type: 'pie',
-                     name: 'Import makeup',
+                     name: 'Share of imports',
                      data: [
                         ['Services',   parseFloat(firstNationData[0])],
                         ['Textiles',       textiles],
@@ -1335,7 +1344,7 @@
                   };
                   var series = [{
                      type: 'pie',
-                     name: 'Export makeup',
+                     name: 'Share of exports',
                      data: [
                         ['Services',   parseFloat(firstNationData[0])],
                         ['Textiles',       textiles],
@@ -1414,7 +1423,7 @@
                   };
                   var series = [{
                      type: 'pie',
-                     name: 'Export makeup',
+                     name: 'Share of exports',
                      data: [
                         ['Services',   parseFloat(firstNationData[0])],
                         ['Textiles',       textiles],
@@ -1520,7 +1529,7 @@
               };
               var series = [{
                  type: 'pie',
-                 name: 'Export makeup',
+                 name: 'Share of exports',
                  data: [
                     ['Services',   parseFloat(firstNationData[0])],
                     ['Textiles',       textiles],

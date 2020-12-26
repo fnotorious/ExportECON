@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    @font-face {
+      font-family: coolvetica, bahnschrift;
+      src: url(../design/coolvetica.rg.woff);
+      src: url(../design/bahnschrift.woff);
+    }
+
+    .blue-box {
+      width: 1920px;
+      height: 100px;
+      background-color: #77ccff;
+      top: -10px;
+      position: absolute;
+    }
+
+    .logo {
+      max-width:11.2%;
+      position: absolute;
+      left: 4px;
+      top: -3px;
+      display: inline-block;
+    }
+
+    #information {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 45px;
+      top: 90px;
+      left: 840px;
+    }
+
+    .graph-split {
+      width: 350px;
+      height: 4px;
+      background-color: #a8a8a8;
+      position: absolute;
+      align: center;
+      right: 790px;
+      top: 173px;
+      border-radius: 50px;
+    }
+
+    .minerals {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      left: 300px;
+      top: 160px;
+    }
+
+    #minerals {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      left: 10px;
+    }
+
+    #mineral-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      left: -260px;
+    }
+
+    .services {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      left: 300px;
+      top: 340px;
+    }
+
+    #services {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      left: 10px;
+    }
+
+    #services-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      left: -260px;
+    }
+
+    .textiles {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      left: 300px;
+      top: 470px;
+    }
+
+    #textiles {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      left: 25px;
+    }
+
+    #textiles-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      left: -260px;
+    }
+
+    .agriculture {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      left: 300px;
+      top: 600px;
+    }
+
+    #agriculture {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      left: -10px;
+    }
+
+    #agriculture-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      left: -260px;
+    }
+
+    .stone {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      left: 300px;
+      top: 730px;
+    }
+
+    #stone {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      left: 35px;
+    }
+
+    #stone-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      left: -260px;
+    }
+
+    .metals {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: 150px;
+      top: 160px;
+    }
+
+    #metals {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 180px;
+    }
+
+    #metals-info {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -100px;
+    }
+
+    .chemicals {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: -30px;
+      top: 105px;
+    }
+
+    #chemicals {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 175px;
+    }
+
+    #chemicals-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -80px;
+    }
+
+    .vehicles {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: -30px;
+      top: 235px;
+    }
+
+    #vehicles {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 190px;
+    }
+
+    #vehicles-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -80px;
+    }
+
+    .machinery {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: -30px;
+      top: 350px;
+    }
+
+    #machinery {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 170px;
+    }
+
+    #machinery-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -80px;
+    }
+
+    .electronics {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: -30px;
+      top: 490px;
+    }
+
+    #electronics {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 155px;
+    }
+
+    #electronics-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -80px;
+    }
+
+    .other {
+      position: absolute;
+      width: 700px;
+      height: 200px;
+      right: -30px;
+      top: 630px;
+    }
+
+    #other {
+      position: absolute;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 1000;
+      font-size: 40px;
+      right: 205px;
+    }
+
+    #other-info {
+      position: relative;
+      font-family: bahnschrift;
+      color: #a8a8a8;
+      font-weight: 400;
+      font-size: 20px;
+      top: 60px;
+      right: -80px;
+    }
+
+    .moreinfo-button {
+        background-color: #77ccff;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: all 0.5s;
+        bottom: 40px;
+        left: 40px;
+        position: absolute;
+        font-family: bahnschrift;
+        font-weight: 1000;
+        font-size: 23px;
+        width: 150px;
+        outline: none;
+      }
+
+      .moreinfo-button:hover {
+        background-color: #91d6ff;
+        color: white;
+        text-decoration: none;
+        outline: none;
+      }
+
+      .moreinfo-button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+        outline: none;
+      }
+  </style>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".moreinfo-button").click(function(e){
+          e.preventDefault();
+          window.location.href = "datapage.html";
+        })
+    });
+    </script>
+    <title>ExportECON</title>
+    <div class="blue-box"></div>
+    <div class="compare-menu">
+      <img class="logo" src="../design/homepage-design-CHRISTMAS-PNG.png">
+    </div>
+    <div class="help-text">
+      <h1 id="information">Information:</h1>
+    </div>
+    <div class="graph-split"></div>
+    <div class="left">
+      <div class="minerals">
+        <h1 id="minerals">Minerals:</h1>
+        <h1 id="mineral-info">Minerals include resources such as crude or refined oil, fuel, gas, mineral ores, electrical power, coal, etc.
+          For instance, a country like Saudi Arabia would have minerals share a large part of its exports, because it exports a lot of petroleum.</h1>
+      </div>
+      <div class="services">
+        <h1 id="services">Services:</h1>
+        <h1 id="services-info">Services usually include things like travel and tourism services, transport services (i.e. airlines, cruiselines), and information/communication tech.</h1>
+      </div>
+      <div class="textiles">
+        <h1 id="textiles">Textiles:</h1>
+        <h1 id="textiles-info">Textiles of course include things like clothing, footwear, and also things like furniture (i.e. mattresses, chair seats), and paintings.</h1>
+      </div>
+      <div class="agriculture">
+        <h1 id="agriculture">Agriculture:</h1>
+        <h1 id="agriculture-info">Includes resources like meats, plant-based food, like wheat and barley, and tobacco.</h1>
+      </div>
+      <div class="stone">
+        <h1 id="stone">Stone:</h1>
+        <h1 id="stone-info">Includes resources like gold, ceramic items, and glassware.</h1>
+      </div>
+      <div class="metals">
+        <h1 id="metals">Metals:</h1>
+        <h1 id="metals-info">Metals include resources usually made out of either iron, steel, or aluminum.</h1>
+      <div class="chemicals">
+        <h1 id="chemicals">Chemicals:</h1>
+        <h1 id="chemicals-info">Chemicals include things like fertilizers, medicine, perfumes/colognes, and cleaning supplies.</h1>
+      </div>
+      <div class="vehicles">
+        <h1 id="vehicles">Vehicles:</h1>
+        <h1 id="vehicles-info">Vehicles include cars, ships, planes, and vehicle parts.</h1>
+      </div>
+      <div class="machinery">
+        <h1 id="machinery">Machinery:</h1>
+        <h1 id="machinery-info">Machinery includes items like refrigerators, air condiitioners, fans, pumps, compressors, printers, and computers.</h1>
+      </div>
+      <div class="electronics">
+        <h1 id="electronics">Electronics:</h1>
+        <h1 id="electronics-info">Electronics include items like apparatuses for communications, like radio or phone, telephones, heaters, generators, etc.</h1>
+      </div>
+      <div class="other">
+        <h1 id="other">Other:</h1>
+        <h1 id="other-info">Commodities that weren't specified by a country.</h1>
+      </div>
+    </div>
+    <button class="moreinfo-button">Back</button>
+  </body>
+</html>
