@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="utf-8">
+    <style>
+      @font-face {
+        font-family: coolvetica, bahnschrift;
+        src: url(../design/coolvetica.rg.woff);
+        src: url(../design/bahnschrift.woff);
+      }
+
+      .blue-box {
+        width: 1920px;
+        height: 100px;
+        background-color: #77ccff;
+        top: -10px;
+        position: absolute;
+      }
+
+      .logo {
+        max-width:20%;
+        position: relative;
+        right: 1270px;
+        top: -23px;
+        display: inline-block;
+      }
+
+      .and {
+        font-family: bahnschrift;
+        color: white;
+        font-weight: 1000;
+        font-size: 25px;
+        top: -40px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .compare-menu {
+        display: inline-block;
+        position: absolute;
+        align: center;
+      }
+
+      .input-box-one {
+        position: relative;
+        display: inline-block;
+        right: 60px;
+        top: -33px;
+        border: 1px solid #ccc;
+        width: 500px;
+        border-radius: 15px;
+        overflow: hidden;
+        background: #e5e5e5 url("../design/arrow.png") no-repeat 100% 10%;
+      }
+
+      .input-box-one select {
+        padding: 10px 15px;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        background-image: none;
+        -webkit-appearance: none;
+      }
+
+      .input-box-one select:focus {
+        outline: none;
+      }
+
+      .drop-down-arrow {
+        background: #e5e5e5 url("../design/arrow2.png") no-repeat 100% 100%;
+      }
+
+      .input-box-two {
+        position: relative;
+        display: inline-block;
+        left: 60px;
+        top: -33px;
+        border: 1px solid #ccc;
+        width: 500px;
+        border-radius: 15px;
+        overflow: hidden;
+        background: #e5e5e5 url("../design/arrow.png") no-repeat 100% 10%;
+      }
+
+      .input-box-two select {
+        padding: 10px 15px;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        background-image: none;
+        -webkit-appearance: none;
+      }
+
+      .input-box-two select:focus {
+        outline: none;
+      }
+
+      .input {
+        position: relative;
+        display: inline-block;
+        right: 500px;
+        top: -60px;
+      }
+
+      .drop-down-arrow2 {
+        background: #e5e5e5 url("../design/arrow2.png") no-repeat 100% 100%;
+      }
+
+      .moreinfo-button {
+          background-color: #77ccff;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 50px;
+          transition: all 0.5s;
+          bottom: 40px;
+          left: 40px;
+          position: absolute;
+          font-family: bahnschrift;
+          font-weight: 1000;
+          font-size: 23px;
+          width: 150px;
+          outline: none;
+        }
+
+        .moreinfo-button:hover {
+          background-color: #91d6ff;
+          color: white;
+          text-decoration: none;
+          outline: none;
+        }
+
+        .moreinfo-button span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+          outline: none;
+        }
+
+        .compare-button {
+            background-color: #fd777c;
+            border: none;
+            color: white;
+            padding: 12px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.5s;
+            top: -4px;
+            left: 810px;
+            position: relative;
+            font-family: bahnschrift;
+            font-weight: 1000;
+            font-size: 23px;
+            width: 230px;
+            outline: none;
+          }
+
+          .compare-button:hover {
+            background-color: #ffa1a5;
+            color: white;
+            text-decoration: none;
+            outline: none;
+          }
+
+          .compare-button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            outline: none;
+          }
+
+          .country-names {
+            position: absolute;
+            top: 100px;
+            left: 550px;
+          }
+
+          #country-name1 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            top: 20px;
+            left: 50px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+          }
+
+          #country-name2 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            top: 20px;
+            left: 790px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+          }
+
+          .graph-split {
+            width: 4px;
+            height: 760px;
+            background-color: #a8a8a8;
+            position: absolute;
+            align: center;
+            right: 740px;
+            top: 133px;
+            border-radius: 50px;
+          }
+
+          .graph-split2 {
+            width: 4px;
+            height: 760px;
+            background-color: #a8a8a8;
+            position: absolute;
+            align: center;
+            left: 440px;
+            top: 133px;
+            border-radius: 50px;
+          }
+
+          .categories {
+            position: absolute;
+            top: 230px;
+            left: 20px;
+          }
+
+          #GDP {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+          }
+
+          #GDP-capita {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 100px;
+            left: 45px;
+          }
+
+          #exports {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 200px;
+            left: 45px;
+          }
+
+          #imports {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 350px;
+            left: 45px;
+          }
+
+          #mostto {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 500px;
+            left: 45px;
+          }
+
+          #mostfrom {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 600px;
+            left: 45px;
+          }
+
+          .actual-text {
+            position: absolute;
+            top: 230px;
+            left: 610px;
+          }
+
+          #GDP1 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+            left: -10px;
+          }
+
+          #GDP-capita1 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 100px;
+            left: 40px;
+          }
+
+          #exports1 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 200px;
+            left: 40px;
+          }
+
+          #imports1 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 350px;
+            left: 40px;
+          }
+
+          #mostto1 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 500px;
+            left: 40px;
+          }
+
+          #mostfrom1 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 600px;
+            left: 40px;
+          }
+
+          .actual-text2 {
+            position: absolute;
+            top: 230px;
+            left: 1350px;
+          }
+
+          #GDP2 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+            left: -10px;
+          }
+
+          #GDP-capita2 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 100px;
+            left: 40px;
+          }
+
+          #exports2 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 200px;
+            left: 40px;
+          }
+
+          #imports2 {
+            font-family: bahnschrift;
+            color: #36c25b;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 350px;
+            left: 40px;
+          }
+
+          #mostto2 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 500px;
+            left: 40px;
+          }
+
+          #mostfrom2 {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 400;
+            font-size: 30px;
+            position: absolute;
+            display: inline-block;
+            width: 300px;
+            top: 600px;
+            left: 40px;
+          }
+
+          #label {
+            font-family: bahnschrift;
+            color: #a8a8a8;
+            font-weight: 1000;
+            font-size: 40px;
+            position: absolute;
+            display: inline-block;
+            width: 400px;
+            top: 100px;
+            left: 20px;
+          }
+  </style>
+  </head>
+  <body>
+    <title>ExportECON</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var select      = $(".input-box-one");
+        var select2     = $('.input-box-two');
+
+        $(select).click(function(e){
+          e.preventDefault();
+          $(this).toggleClass("drop-down-arrow");
+        })
+
+        $(select2).click(function(e){
+          e.preventDefault();
+          $(this).toggleClass("drop-down-arrow2");
+        })
+
+        $(".compare-button").on('click', function(e){
+          e.preventDefault();
+          if ($("#country").val() === "" || $("#country2").val() === "")
+          {
+            console.log("error");
+          }
+
+          else if ($("#country").val() === $("#country2").val())
+          {
+            console.log("error");
+          }
+
+          else {
+            localStorage.clear()
+            localStorage.setItem("country1", $("#country").val())
+            localStorage.setItem("country2", $("#country2").val())
+            localStorage.setItem("id1", $("#country option:selected").attr('id'))
+            localStorage.setItem("id2", $("#country2 option:selected").attr('id'))
+            window.location.href = "moreinfo.html";
+          }
+        })
+
+        $(".moreinfo-button").click(function(e){
+          e.preventDefault();
+          window.location.href = "datapage.html";
+        })
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        var firstCountryName = localStorage.getItem("country1")
+        var secondCountryName = localStorage.getItem("country2")
+
+        $("#country-name1").html(firstCountryName);
+        $("#country-name2").html(secondCountryName);
+
+        if (firstCountryName === "Democratic Republic of the Congo")
+        {
+          $("#country-name1").html("D. Republic of the Congo");
+        }
+
+        if (secondCountryName === "Democratic Republic of the Congo")
+        {
+          $("#country-name2").html("D. Republic of the Congo");
+        }
+    });
+    </script>
+    <div class="blue-box"></div>
+    <div class="compare-menu">
+      <img class="logo" src="../design/homepage-design-CHRISTMAS-PNG.png">
+      <div class="input">
+        <div class="form-group input-box-one col-md-6">
+          <select id="country" name="country" class="form-control" type="button">
+            <option value="">Select a country</option>
+            <option id="al" value="Albania">Albania</option>
+            <option id="dz" value="Algeria">Algeria</option>
+            <option id="ao" value="Angola">Angola</option>
+            <option id="ar" value="Argentina">Argentina</option>
+            <option id="am" value="Armenia">Armenia</option>
+            <option id="au" value="Australia">Australia</option>
+            <option id="at" value="Austria">Austria</option>
+            <option id="az" value="Azerbaijan">Azerbaijan</option>
+            <option id="bh" value="Bahrain">Bahrain</option>
+            <option id="bd" value="Bangladesh">Bangladesh</option>
+            <option id="by" value="Belarus">Belarus</option>
+            <option id="be" value="Belgium">Belgium</option>
+            <option id="bo" value="Bolivia">Bolivia</option>
+            <option id="ba" value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+            <option id="bw" value="Botswana">Botswana</option>
+            <option id="br" value="Brazil">Brazil</option>
+            <option id="bg" value="Bulgaria">Bulgaria</option>
+            <option id="bf" value="Burkina Faso">Burkina Faso</option>
+            <option id="kh" value="Cambodia">Cambodia</option>
+            <option id="cm" value="Cameroon">Cameroon</option>
+            <option id="ca" value="Canada">Canada</option>
+            <option id="cl" value="Chile">Chile</option>
+            <option id="cn" value="China">China</option>
+            <option id="co" value="Colombia">Colombia</option>
+            <option id="km" value="Comoros">Comoros</option>
+            <option id="cg" value="Republic of the Congo">Republic of the Congo</option>
+            <option id="cd" value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+            <option id="cr" value="Costa Rica">Costa Rica</option>
+            <option id="hr" value="Croatia">Croatia</option>
+            <option id="cu" value="Cuba">Cuba</option>
+            <option id="cy" value="Cyprus">Cyprus</option>
+            <option id="cz" value="Czechia">Czechia</option>
+            <option id="dk" value="Denmark">Denmark</option>
+            <option id="do" value="Dominican Republic">Dominican Republic</option>
+            <option id="ec" value="Ecuador">Ecuador</option>
+            <option id="eg" value="Egypt">Egypt</option>
+            <option id="sv" value="El Salvador">El Salvador</option>
+            <option id="ee" value="Estonia">Estonia</option>
+            <option id="et" value="Ethiopia">Ethiopia</option>
+            <option id="fi" value="Finland">Finland</option>
+            <option id="fr" value="France">France</option>
+            <option id="ga" value="Gabon">Gabon</option>
+            <option id="ge" value="Georgia">Georgia</option>
+            <option id="de" value="Germany">Germany</option>
+            <option id="gh" value="Ghana">Ghana</option>
+            <option id="gr" value="Greece">Greece</option>
+            <option id="gt" value="Guatemala">Guatemala</option>
+            <option id="gn" value="Guinea">Guinea</option>
+            <option id="hn" value="Honduras">Honduras</option>
+            <option id="hu" value="Hungary">Hungary</option>
+            <option id="in" value="India">India</option>
+            <option id="id" value="Indonesia">Indonesia</option>
+            <option id="ir" value="Iran">Iran</option>
+            <option id="iq" value="Iraq">Iraq</option>
+            <option id="ie" value="Ireland">Ireland</option>
+            <option id="il" value="Israel">Israel</option>
+            <option id="it" value="Italy">Italy</option>
+            <option id="jm" value="Jamaica">Jamaica</option>
+            <option id="jp" value="Japan">Japan</option>
+            <option id="jo" value="Jordan">Jordan</option>
+            <option id="kz" value="Kazakhstan">Kazakhstan</option>
+            <option id="ke" value="Kenya">Kenya</option>
+            <option id="kr" value="South Korea">South Korea</option>
+            <option id="kw" value="Kuwait">Kuwait</option>
+            <option id="kg" value="Kyrgyzstan">Kyrgyzstan</option>
+            <option id="la" value="Laos">Laos</option>
+            <option id="lv" value="Latvia">Latvia</option>
+            <option id="lb" value="Lebanon">Lebanon</option>
+            <option id="ls" value="Lesotho">Lesotho</option>
+            <option id="lr" value="Liberia">Liberia</option>
+            <option id="ly" value="Libya">Libya</option>
+            <option id="lt" value="Lithuania">Lithuania</option>
+            <option id="mk" value="North Macedonia">North Macedonia</option>
+            <option id="mg" value="Madagascar">Madagascar</option>
+            <option id="mw" value="Malawi">Malawi</option>
+            <option id="my" value="Malaysia">Malaysia</option>
+            <option id="ml" value="Mali">Mali</option>
+            <option id="mr" value="Mauritania">Mauritania</option>
+            <option id="mu" value="Mauritius">Mauritius</option>
+            <option id="mx" value="Mexico">Mexico</option>
+            <option id="md" value="Moldova">Moldova</option>
+            <option id="mn" value="Mongolia">Mongolia</option>
+            <option id="ma" value="Morocco">Morocco</option>
+            <option id="mz" value="Mozambique">Mozambique</option>
+            <option id="mm" value="Myanmar">Myanmar</option>
+            <option id="na" value="Namibia">Namibia</option>
+            <option id="nl" value="Netherlands">Netherlands</option>
+            <option id="nz" value="New Zealand">New Zealand</option>
+            <option id="ni" value="Nicaragua">Nicaragua</option>
+            <option id="ng" value="Nigeria">Nigeria</option>
+            <option id="no" value="Norway">Norway</option>
+            <option id="om" value="Oman">Oman</option>
+            <option id="pk" value="Pakistan">Pakistan</option>
+            <option id="pa" value="Panama">Panama</option>
+            <option id="pg" value="Papua New Guinea">Papua New Guinea</option>
+            <option id="py" value="Paraguay">Paraguay</option>
+            <option id="pe" value="Peru">Peru</option>
+            <option id="ph" value="Philippines">Philippines</option>
+            <option id="pl" value="Poland">Poland</option>
+            <option id="pt" value="Portugal">Portugal</option>
+            <option id="qa" value="Qatar">Qatar</option>
+            <option id="ro" value="Romania">Romania</option>
+            <option id="ru" value="Russia">Russia</option>
+            <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
+            <option id="sn" value="Senegal">Senegal</option>
+            <option id="rs" value="Serbia">Serbia</option>
+            <option id="sg" value="Singapore">Singapore</option>
+            <option id="sk" value="Slovakia">Slovakia</option>
+            <option id="si" value="Slovenia">Slovenia</option>
+            <option id="za" value="South Africa">South Africa</option>
+            <option id="es" value="Spain">Spain</option>
+            <option id="lk" value="Sri Lanka">Sri Lanka</option>
+            <option id="sz" value="Eswatini">Swaziland</option>
+            <option id="se" value="Sweden">Sweden</option>
+            <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
+            <option id="tj" value="Tajikistan">Tajikistan</option>
+            <option id="tz" value="Tanzania">Tanzania</option>
+            <option id="th" value="Thailand">Thailand</option>
+            <option id="tg" value="Togo">Togo</option>
+            <option id="tt" value="Trinidad and Tobago">Trinidad and Tobago</option>
+            <option id="tn" value="Tunisia">Tunisia</option>
+            <option id="tr" value="Turkey">Turkey</option>
+            <option id="tm" value="Turkmenistan">Turkmenistan</option>
+            <option id="ug" value="Uganda">Uganda</option>
+            <option id="ua" value="Ukraine">Ukraine</option>
+            <option id="ae" value="United Arab Emirates">United Arab Emirates</option>
+            <option id="gb" value="United Kingdom">United Kingdom</option>
+            <option id="us" value="United States of America">United States</option>
+            <option id="uy" value="Uruguay">Uruguay</option>
+            <option id="uz" value="Uzbekistan">Uzbekistan</option>
+            <option id="ve" value="Venezuela">Venezuela</option>
+            <option id="vn" value="Vietnam">Vietnam</option>
+            <option id="ye" value="Yemen">Yemen</option>
+            <option id="zm" value="Zambia">Zambia</option>
+            <option id="zw" value="Zimbabwe">Zimbabwe</option>
+          </select>
+        </div>
+        <h1 class="and">vs.</h1>
+        <div class="form-group input-box-two col-md-6">
+          <select id="country2" name="country2" class="form-control" type="button">
+            <option value="">Select a country</option>
+            <option id="al" value="Albania">Albania</option>
+            <option id="dz" value="Algeria">Algeria</option>
+            <option id="ao" value="Angola">Angola</option>
+            <option id="ar" value="Argentina">Argentina</option>
+            <option id="am" value="Armenia">Armenia</option>
+            <option id="au" value="Australia">Australia</option>
+            <option id="at" value="Austria">Austria</option>
+            <option id="az" value="Azerbaijan">Azerbaijan</option>
+            <option id="bh" value="Bahrain">Bahrain</option>
+            <option id="bd" value="Bangladesh">Bangladesh</option>
+            <option id="by" value="Belarus">Belarus</option>
+            <option id="be" value="Belgium">Belgium</option>
+            <option id="bo" value="Bolivia">Bolivia</option>
+            <option id="ba" value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+            <option id="bw" value="Botswana">Botswana</option>
+            <option id="br" value="Brazil">Brazil</option>
+            <option id="bg" value="Bulgaria">Bulgaria</option>
+            <option id="bf" value="Burkina Faso">Burkina Faso</option>
+            <option id="kh" value="Cambodia">Cambodia</option>
+            <option id="cm" value="Cameroon">Cameroon</option>
+            <option id="ca" value="Canada">Canada</option>
+            <option id="cl" value="Chile">Chile</option>
+            <option id="cn" value="China">China</option>
+            <option id="co" value="Colombia">Colombia</option>
+            <option id="km" value="Comoros">Comoros</option>
+            <option id="cg" value="Republic of the Congo">Republic of the Congo</option>
+            <option id="cd" value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+            <option id="cr" value="Costa Rica">Costa Rica</option>
+            <option id="hr" value="Croatia">Croatia</option>
+            <option id="cu" value="Cuba">Cuba</option>
+            <option id="cy" value="Cyprus">Cyprus</option>
+            <option id="cz" value="Czechia">Czechia</option>
+            <option id="dk" value="Denmark">Denmark</option>
+            <option id="do" value="Dominican Republic">Dominican Republic</option>
+            <option id="ec" value="Ecuador">Ecuador</option>
+            <option id="eg" value="Egypt">Egypt</option>
+            <option id="sv" value="El Salvador">El Salvador</option>
+            <option id="ee" value="Estonia">Estonia</option>
+            <option id="et" value="Ethiopia">Ethiopia</option>
+            <option id="fi" value="Finland">Finland</option>
+            <option id="fr" value="France">France</option>
+            <option id="ga" value="Gabon">Gabon</option>
+            <option id="ge" value="Georgia">Georgia</option>
+            <option id="de" value="Germany">Germany</option>
+            <option id="gh" value="Ghana">Ghana</option>
+            <option id="gr" value="Greece">Greece</option>
+            <option id="gt" value="Guatemala">Guatemala</option>
+            <option id="gn" value="Guinea">Guinea</option>
+            <option id="hn" value="Honduras">Honduras</option>
+            <option id="hu" value="Hungary">Hungary</option>
+            <option id="in" value="India">India</option>
+            <option id="id" value="Indonesia">Indonesia</option>
+            <option id="ir" value="Iran">Iran</option>
+            <option id="iq" value="Iraq">Iraq</option>
+            <option id="ie" value="Ireland">Ireland</option>
+            <option id="il" value="Israel">Israel</option>
+            <option id="it" value="Italy">Italy</option>
+            <option id="jm" value="Jamaica">Jamaica</option>
+            <option id="jp" value="Japan">Japan</option>
+            <option id="jo" value="Jordan">Jordan</option>
+            <option id="kz" value="Kazakhstan">Kazakhstan</option>
+            <option id="ke" value="Kenya">Kenya</option>
+            <option id="kr" value="South Korea">South Korea</option>
+            <option id="kw" value="Kuwait">Kuwait</option>
+            <option id="kg" value="Kyrgyzstan">Kyrgyzstan</option>
+            <option id="la" value="Laos">Laos</option>
+            <option id="lv" value="Latvia">Latvia</option>
+            <option id="lb" value="Lebanon">Lebanon</option>
+            <option id="ls" value="Lesotho">Lesotho</option>
+            <option id="lr" value="Liberia">Liberia</option>
+            <option id="ly" value="Libya">Libya</option>
+            <option id="lt" value="Lithuania">Lithuania</option>
+            <option id="mk" value="North Macedonia">North Macedonia</option>
+            <option id="mg" value="Madagascar">Madagascar</option>
+            <option id="mw" value="Malawi">Malawi</option>
+            <option id="my" value="Malaysia">Malaysia</option>
+            <option id="ml" value="Mali">Mali</option>
+            <option id="mr" value="Mauritania">Mauritania</option>
+            <option id="mu" value="Mauritius">Mauritius</option>
+            <option id="mx" value="Mexico">Mexico</option>
+            <option id="md" value="Moldova">Moldova</option>
+            <option id="mn" value="Mongolia">Mongolia</option>
+            <option id="ma" value="Morocco">Morocco</option>
+            <option id="mz" value="Mozambique">Mozambique</option>
+            <option id="mm" value="Myanmar">Myanmar</option>
+            <option id="na" value="Namibia">Namibia</option>
+            <option id="nl" value="Netherlands">Netherlands</option>
+            <option id="nz" value="New Zealand">New Zealand</option>
+            <option id="ni" value="Nicaragua">Nicaragua</option>
+            <option id="ng" value="Nigeria">Nigeria</option>
+            <option id="no" value="Norway">Norway</option>
+            <option id="om" value="Oman">Oman</option>
+            <option id="pk" value="Pakistan">Pakistan</option>
+            <option id="pa" value="Panama">Panama</option>
+            <option id="pg" value="Papua New Guinea">Papua New Guinea</option>
+            <option id="py" value="Paraguay">Paraguay</option>
+            <option id="pe" value="Peru">Peru</option>
+            <option id="ph" value="Philippines">Philippines</option>
+            <option id="pl" value="Poland">Poland</option>
+            <option id="pt" value="Portugal">Portugal</option>
+            <option id="qa" value="Qatar">Qatar</option>
+            <option id="ro" value="Romania">Romania</option>
+            <option id="ru" value="Russia">Russia</option>
+            <option id="sa" value="Saudi Arabia">Saudi Arabia</option>
+            <option id="sn" value="Senegal">Senegal</option>
+            <option id="rs" value="Serbia">Serbia</option>
+            <option id="sg" value="Singapore">Singapore</option>
+            <option id="sk" value="Slovakia">Slovakia</option>
+            <option id="si" value="Slovenia">Slovenia</option>
+            <option id="za" value="South Africa">South Africa</option>
+            <option id="es" value="Spain">Spain</option>
+            <option id="lk" value="Sri Lanka">Sri Lanka</option>
+            <option id="sz" value="Eswatini">Swaziland</option>
+            <option id="se" value="Sweden">Sweden</option>
+            <option id="ch" value="Switzerland">Switzerland</option>
+            <option id="sy" value="Syria">Syria</option>
+            <option id="tj" value="Tajikistan">Tajikistan</option>
+            <option id="tz" value="Tanzania">Tanzania</option>
+            <option id="th" value="Thailand">Thailand</option>
+            <option id="tg" value="Togo">Togo</option>
+            <option id="tt" value="Trinidad and Tobago">Trinidad and Tobago</option>
+            <option id="tn" value="Tunisia">Tunisia</option>
+            <option id="tr" value="Turkey">Turkey</option>
+            <option id="tm" value="Turkmenistan">Turkmenistan</option>
+            <option id="ug" value="Uganda">Uganda</option>
+            <option id="ua" value="Ukraine">Ukraine</option>
+            <option id="ae" value="United Arab Emirates">United Arab Emirates</option>
+            <option id="gb" value="United Kingdom">United Kingdom</option>
+            <option id="us" value="United States of America">United States</option>
+            <option id="uy" value="Uruguay">Uruguay</option>
+            <option id="uz" value="Uzbekistan">Uzbekistan</option>
+            <option id="ve" value="Venezuela">Venezuela</option>
+            <option id="vn" value="Vietnam">Vietnam</option>
+            <option id="ye" value="Yemen">Yemen</option>
+            <option id="zm" value="Zambia">Zambia</option>
+            <option id="zw" value="Zimbabwe">Zimbabwe</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="moreinfo-button">Back</button>
+    <button class="compare-button">Compare!</button>
+    <div class="country-names">
+      <h1 id="country-name1">Loading...</h1>
+      <h1 id="country-name2">Loading...</h1>
+    </div>
+    <div class="graph-split"></div>
+    <div class="graph-split2"></div>
+    <div class="categories">
+      <h1 id="GDP">Gross Domestic Product (in millions of US$)</h1>
+      <h1 id="GDP-capita">GDP Per Capita (in US$)</h1>
+      <h1 id="exports">Money From Exports (in thousands of US$)</h1>
+      <h1 id="imports">Money From Imports (in thousands of US$)</h1>
+      <h1 id="mostto">Exports most to</h1>
+      <h1 id="mostfrom">Imports most from</h1>
+    </div>
+    <div class="actual-text">
+      <h1 id="GDP1">Loading...</h1>
+      <h1 id="GDP-capita1">Loading...</h1>
+      <h1 id="exports1">Loading...</h1>
+      <h1 id="imports1">Loading...</h1>
+      <h1 id="mostto1">Loading...</h1>
+      <h1 id="mostfrom1">Loading...</h1>
+    </div>
+    <div class="actual-text2">
+      <h1 id="GDP2">Loading...</h1>
+      <h1 id="GDP-capita2">Loading...</h1>
+      <h1 id="exports2">Loading...</h1>
+      <h1 id="imports2">Loading...</h1>
+      <h1 id="mostto2">Loading...</h1>
+      <h1 id="mostfrom2">Loading...</h1>
+    </div>
+    <script>
+      $.getScript("transfer.js", function(e) {
+        async function afunction()
+        {
+          firstNationGDP = await getGDP(localStorage.getItem("country1")) ;
+          secondNationGDP = await getGDP(localStorage.getItem("country2")) ;
+
+          $("#GDP1").html("$" + firstNationGDP + " (2020 est.)");
+          $("#GDP2").html("$" + secondNationGDP + " (2020 est.)");
+        }
+
+        afunction();
+
+        async function afunction2()
+        {
+          firstNationGDPC = await getGDPC(localStorage.getItem("country1")) ;
+          secondNationGDPC = await getGDPC(localStorage.getItem("country2")) ;
+
+          $("#GDP-capita1").html("$" + firstNationGDPC + " (2020 est.)");
+          $("#GDP-capita2").html("$" + secondNationGDPC + " (2020 est.)");
+        }
+
+        afunction2();
+
+        async function afunction3()
+        {
+          firstNationExports = await ExportMoney(localStorage.getItem("country1")) ;
+          secondNationExports = await ExportMoney(localStorage.getItem("country2")) ;
+
+          $("#exports1").html("$" + firstNationExports + " (2019)");
+          $("#exports2").html("$" + secondNationExports + " (2019)");
+        }
+
+        afunction3();
+
+        async function afunction4()
+        {
+          firstNationImports = await ImportMoney(localStorage.getItem("country1")) ;
+          secondNationImports = await ImportMoney(localStorage.getItem("country2")) ;
+
+          $("#imports1").html("$" + firstNationImports + " (2019)");
+          $("#imports2").html("$" + secondNationImports + " (2019)");
+        }
+
+        afunction4();
+
+        async function afunction5()
+        {
+          firstNationExport = await ExportPartner(localStorage.getItem("country1")) ;
+          secondNationExport = await ExportPartner(localStorage.getItem("country2")) ;
+
+          $("#mostto1").html(firstNationExport);
+          $("#mostto2").html(secondNationExport);
+        }
+
+        afunction5();
+
+        async function afunction6()
+        {
+          firstNationImport = await ImportPartner(localStorage.getItem("country1")) ;
+          secondNationImport = await ImportPartner(localStorage.getItem("country2")) ;
+
+          $("#mostfrom1").html(firstNationImport);
+          $("#mostfrom2").html(secondNationImport);
+        }
+
+        afunction6();
+      })
+    </script>
+  </body>
+</html>
