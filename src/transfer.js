@@ -78,6 +78,7 @@ async function transferInfo(country)
 
       $capital = $($('body > div.mui-container-fluid.content > div > div.mui-col-md-6.tutorial-content > table > tbody > tr:nth-child(' + i + ') > td:nth-child(2)')).text().trim();
       $currency = $($('body > div.mui-container-fluid.content > div > div.mui-col-md-6.tutorial-content > table > tbody > tr:nth-child(' + i + ') > td:nth-child(3)')).text().trim();
+      break ;
     }
   }
 
@@ -125,11 +126,16 @@ async function transferInfo(country)
 */
 async function getGDP(country)
 {
-  const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)");
-  const $ = cheerio.load(data);
+  // send request to url
 
-  var countryName ;
-  var grossDomProduct;
+  const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)");
+  const $ = cheerio.load(data);   // for selecting elements from url's HTML
+
+  var countryName;                // to store the selector of a country name from the url's HTML data
+  var grossDomProduct;            // to store GDP data of a country
+
+  // Again, error prevention for minor word/letter discrepencies between the
+  // country the user selected and how the country is referenced in the url.
 
   if (country === "United States of America")
   {
@@ -151,17 +157,31 @@ async function getGDP(country)
     country = "Congo, Republic of the";
   }
 
+  // A loop that will iterate throughout a table within the stored url's HTML
+  // that contains the data we are looking for. (country name, capital, and
+  // currency)
+
   for (var i = 1; i <= 194; i++)
   {
+    // get selector for the i'th index of the table
+
     countryName = $('#mw-content-text > div.mw-parser-output > table.wikitable > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(2) > a');
     $name = $(countryName);
 
+    // if the country name at the current index in the table matches
+    // the country we're looking for
+
     if (($name.text().trim()).includes(country))
     {
+      // retrieve the GDP data from this table's index
+
       grossDomProduct = $($('#mw-content-text > div.mw-parser-output > table.wikitable > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(3)')).text().trim();
       break;
     }
   }
+
+  // Syria unfortunately has no 2020 estimate data on its GDP available
+  // as of right now, so it will get the GDP value of N/A.
 
   if (country === "Syria")
   {
