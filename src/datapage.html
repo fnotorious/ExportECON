@@ -1,3 +1,5 @@
+<!-- Export/import makeup page, second page the user sees after making first nation comparison -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -574,33 +576,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
-        var select      = $(".input-box-one");
-        var select2     = $('.input-box-two');
+        var select      = $(".input-box-one");  // left select input box
+        var select2     = $('.input-box-two');  // right select input box
 
+        /**
+        * Function for changing the way the arrow within the left select element
+        * input box is pointing (either up or down) whenever the user clicks it.
+        */
         $(select).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow");
         })
 
+        /**
+        * Same as function above, just with right select element.
+        */
         $(select2).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow2");
         })
 
+        /**
+        * Compare button function for error prevention.
+        */
         $(".compare-button").on('click', function(e){
           e.preventDefault();
+
+          // if user hasn't entered in one or more countries as input
           if ($("#country").val() === "" || $("#country2").val() === "")
           {
             console.log("error");
           }
 
+          // if user tries to compare the same country
           else if ($("#country").val() === $("#country2").val())
           {
             console.log("error");
           }
 
           else {
-            localStorage.clear()
+            localStorage.clear()      // clear local storage
+
+            // Retrieve important items, such as country names and their ISO
+            // 2-letter ID's and store them in local storage. The ISO codes
+            // will come in handy when we want to load up the corresponding flags
+            // for the countries selected by the user.
+
             localStorage.setItem("country1", $("#country").val())
             localStorage.setItem("country2", $("#country2").val())
             localStorage.setItem("id1", $("#country option:selected").attr('id'))
@@ -609,11 +630,18 @@
           }
         })
 
+        /**
+        * Function that switches to the help page if user clicks help button.
+        */
         $(".help-button").click(function(e){
           e.preventDefault();
           window.location.href = "help.html";
         })
 
+        /**
+        * Function that switches to economic measurement data page when user
+        * clicks 'next' button.
+        */
         $(".moreinfo-button").click(function(e){
           e.preventDefault();
           window.location.href = "moreinfo.html";
@@ -622,18 +650,33 @@
     </script>
     <script>
     $(document).ready(function() {
-        var firstCountryName = localStorage.getItem("country1")
-        var secondCountryName = localStorage.getItem("country2")
+        var firstCountryName = localStorage.getItem("country1")       // store first country name
+        var secondCountryName = localStorage.getItem("country2")      // store second country name
+
+        // Use the ISO code id's retrieved from the home page to get the flags
+        // from a local file containing the flags of all countries in the world.
+
         var firstCountryFlag = "flags/" + localStorage.getItem("id1") + ".png"
         var secondCountryFlag = "flags/" + localStorage.getItem("id2") + ".png"
-        var firstData;
-        var secondData;
 
+        var firstData;      // to store capital city and cuurency of first country
+        var secondData;     // to store capital city and cuurency of second country
+
+        /**
+        * Open transfer.js, utilize function for retrieving capital city and currency.
+        */
         $.getScript("transfer.js", function(e) {
+
+          // wrapped async function to get the needed data
           async function afunction()
           {
-            firstData = await transferInfo(firstCountryName) ;
-            secondData = await transferInfo(secondCountryName) ;
+            // get the capital city and currency for both countries selected
+
+            firstData = await transferInfo(firstCountryName);
+            secondData = await transferInfo(secondCountryName);
+
+            // push data to the browser
+
             $('#capital2').html("CAPITAL: " + firstData[0]);
             $('#capital1').html("CAPITAL: " + secondData[0]);
             $('#currency2').html("CURRENCY: " + firstData[1]);
@@ -642,18 +685,27 @@
           afunction();
         })
 
+        // push country names to browser
+
         $("#name1").html(firstCountryName);
         $("#name2").html(secondCountryName);
 
+        // DR of the Congo is too long of a name and can ruin the look of the
+        // UI, but these if statements solve the issue.
+
         if (firstCountryName === "Democratic Republic of the Congo")
         {
+          // fix country name on browser
           $("#name1").html("D. Republic of the Congo");
         }
 
         if (secondCountryName === "Democratic Republic of the Congo")
         {
+          // fix country name on browser
           $("#name2").html("D. Republic of the Congo");
         }
+
+        // push flag images to the browser
 
         $("#first-flag").attr("src", firstCountryFlag);
         $("#second-flag").attr("src", secondCountryFlag);
