@@ -158,8 +158,7 @@ async function getGDP(country)
   }
 
   // A loop that will iterate throughout a table within the stored url's HTML
-  // that contains the data we are looking for. (country name, capital, and
-  // currency)
+  // that contains the data we are looking for.
 
   for (var i = 1; i <= 194; i++)
   {
@@ -188,16 +187,29 @@ async function getGDP(country)
     grossDomProduct = "N/A";
   }
 
+  // return the GDP of a country
+
   return await grossDomProduct;
 }
 
+/**
+* Asynchronous function for retrieving the GDP per capita of a country
+*
+* @param {String} country the name of a country
+* @return {String} the GDP per capita of a country
+*/
 async function getGDPC(country)
 {
-  const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita");
-  const $ = cheerio.load(data);
+  // send request to url
 
-  var countryName ;
-  var grossDomCapita;
+  const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita");
+  const $ = cheerio.load(data);   // for selecting elements from url's HTML
+
+  var countryName ;               // to store the selector of a country name from the url's HTML data
+  var grossDomCapita;             // to store GDP per capita data of a country
+
+  // Error prevention for minor word/letter discrepencies between the
+  // country the user selected and how the country is referenced in the url.
 
   if (country === "United States of America")
   {
@@ -219,21 +231,46 @@ async function getGDPC(country)
     country = "Congo, Republic of the";
   }
 
+  // A loop that will iterate throughout a table within the stored url's HTML
+  // that contains the data we are looking for.
+
   for (var i = 1; i <= 194; i++)
   {
+    // get selector for the i'th index of the table
+
     countryName = $('#mw-content-text > div.mw-parser-output > table > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(2) > a');
     $name = $(countryName);
 
+    // if the country name at the current index in the table matches
+    // the country we're looking for
+
     if (($name.text().trim()).includes(country))
     {
+      // retrieve the GDP per capita data from this table's index
+
       grossDomCapita = $($('#mw-content-text > div.mw-parser-output > table > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(3)')).text().trim();
       break;
     }
   }
 
+  // return the GDP per capita of a country
+
   return await grossDomCapita;
 }
 
+
+// The rest of the functions share the exact same pattern as the previous in
+// in regards to what they do and how they perform, so I will leave out
+// documentation for the sake of not repeating from within each function from
+// here.
+
+
+/**
+* Asynchronous function for retrieving the value of exports of a country
+*
+* @param {String} country the name of a country
+* @return {String} the value of exports of a country
+*/
 async function ExportMoney(country)
 {
   const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_exports");
@@ -241,7 +278,7 @@ async function ExportMoney(country)
 
   var countryName ;
   var moneyFromExports;
-  var found = false ;
+  var found = false ;  // value incase a nation is not found in the url's table
 
   if (country === "United States of America")
   {
@@ -266,10 +303,7 @@ async function ExportMoney(country)
     }
   }
 
-  if (country === "Syria" || country === "United Arab Emirates" || country === "Turkmenistan" ||  country === "Yemen")
-  {
-    moneyFromExports = "N/A";
-  }
+  // if country does not appear within the table being scraped from the url
 
   if(found == false)
   {
@@ -279,6 +313,12 @@ async function ExportMoney(country)
   return await moneyFromExports;
 }
 
+/**
+* Asynchronous function for retrieving the value of imports of a country
+*
+* @param {String} country the name of a country
+* @return {String} the value of imports of a country
+*/
 async function ImportMoney(country)
 {
   const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_imports");
@@ -286,7 +326,7 @@ async function ImportMoney(country)
 
   var countryName ;
   var moneyFromImports;
-  var found = false ;
+  var found = false ;  // value incase a nation is not found in the url's table
 
   if (country === "United States of America")
   {
@@ -311,6 +351,8 @@ async function ImportMoney(country)
     }
   }
 
+  // if country does not appear within the table being scraped from the url
+
   if(found == false)
   {
     moneyFromExports = "N/A";
@@ -319,6 +361,13 @@ async function ImportMoney(country)
   return await moneyFromImports;
 }
 
+/**
+* Asynchronous function for getting information on where a country exports to
+* the most
+*
+* @param {String} country the name of a country
+* @return {String} the value of imports of a country
+*/
 async function ExportPartner(country)
 {
   const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_leading_trade_partners");
@@ -372,6 +421,13 @@ async function ExportPartner(country)
   return await exportPartner;
 }
 
+/**
+* Asynchronous function for getting information on where a country imports from
+* the most
+*
+* @param {String} country the name of a country
+* @return {String} the value of imports of a country
+*/
 async function ImportPartner(country)
 {
   const { data } = await axios.get("https://en.wikipedia.org/wiki/List_of_countries_by_leading_trade_partners");
