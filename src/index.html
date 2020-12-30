@@ -1,3 +1,5 @@
+<!-- Front page, first page the user sees when app laods -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -189,38 +191,58 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
-        var select      = $(".input-box-one");
-        var select2     = $('.input-box-two');
+        var select      = $(".input-box-one");    // left select input box
+        var select2     = $('.input-box-two');    // right select input box
 
+        /**
+        * Function for changing the way the arrow within the left select element
+        * input box is pointing (either up or down) whenever the user clicks it.
+        */
         $(select).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow");
         })
 
+        /**
+        * Same as function above, just with right select element.
+        */
         $(select2).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow2");
         })
 
+        /**
+        * Compare button function for error prevention.
+        */
         $(".compare-button").on('click', function(e){
           e.preventDefault();
+
+          // if user hasn't entered in one or more countries as input
           if ($("#country").val() === "" || $("#country2").val() === "")
           {
             document.getElementById("error").innerHTML = "Please enter the countries to compare"
           }
 
+          // if user tries to compare the same country
           else if ($("#country").val() === $("#country2").val())
           {
             document.getElementById("error").innerHTML = "Please enter two different countries"
           }
 
           else {
-            document.getElementById("error").innerHTML = ""
+            document.getElementById("error").innerHTML = ""     // clear error messages if any
+
+            // Retrieve important items, such as country names and their ISO
+            // 2-letter ID's and store them in local storage. The ISO codes
+            // will come in handy when we want to laod up the corresponding flags
+            // for the countries selected by the user.
+
             localStorage.setItem("country1", $("#country").val())
             localStorage.setItem("country2", $("#country2").val())
             localStorage.setItem("id1", $("#country option:selected").attr('id'))
             localStorage.setItem("id2", $("#country2 option:selected").attr('id'))
-            window.location.href = "datapage.html";
+
+            window.location.href = "datapage.html";   // switch to the export/import makeup page
           }
         })
     });
