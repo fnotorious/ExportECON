@@ -1068,29 +1068,43 @@
       </div>
     </div>
     <script language = "JavaScript">
+
+       /**
+       * Script for displaying export/import makeup charts for both countries.
+       * For both nations, export makeup data will automatically show up first
+       * when the user switches to the datapage.html, but can be changed
+       * to import makeup with the click of a button.
+       */
        $(document).ready(function() {
-          var Highcharts = require('highcharts');
+          var Highcharts = require('highcharts');   // get Highcharts API
           require('highcharts/modules/exporting')(Highcharts);
           require('highcharts/highcharts-3d')(Highcharts);
 
-          var url;
-          var firstNationData;
-          var services = 0.0 ;
-          var textiles = 0.0 ;
-          var agriculture = 0.0 ;
-          var stone = 0.0 ;
-          var minerals = 0.0 ;
-          var metals = 0.0 ;
-          var chemicals = 0.0 ;
-          var vehicles = 0.0 ;
-          var machinery = 0.0 ;
-          var electronics = 0.0 ;
-          var other = 0.0 ;
+          var firstNationData;            // store first country's makeup data
+          var secondNationData;           // store second country's makeup data
+          var services = 0.0 ;            // share of services sector
+          var textiles = 0.0 ;            // share of textiles sector
+          var agriculture = 0.0 ;         // share of agriculture sector
+          var stone = 0.0 ;               // share of stone sector
+          var minerals = 0.0 ;            // share of minerals sector
+          var metals = 0.0 ;              // share of metals sector
+          var chemicals = 0.0 ;           // share of chemicals sector
+          var vehicles = 0.0 ;            // share of vehicles sector
+          var machinery = 0.0 ;           // share of machinery sector
+          var electronics = 0.0 ;         // share of electronics sector
+          var other = 0.0 ;               // share of miscellaneous resources
+
+          // open csvdata.js script
 
           $.getScript("csvdata.js", function(e) {
-            async function afunction()
+            async function afunction()    // async wrapper
             {
+              // now get the required data (export makeup of first country)
+
               firstNationData = await getData("csv/What did " + localStorage.getItem("country1") + " export in 2018_.csv") ;
+
+              // store each index of stored array of data to its corresponding sector
+
               services = parseFloat(firstNationData[0]) ;
               textiles = parseFloat(firstNationData[1]) ;
               agriculture = parseFloat(firstNationData[2]) ;
@@ -1104,7 +1118,7 @@
               other = parseFloat(firstNationData[10]) ;
 
               Highcharts.setOptions({
-               colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
+               colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],  // sets colors of pie chart
                exporting: {
                  enabled: false
                },
@@ -1115,19 +1129,22 @@
 
               var chart = {
                  type: 'pie',
-                 options3d: {
+                 options3d: {                   // enables 3d pie
                    enabled: true,
                    alpha: 45,
                    beta: 0
                  },
-                 backgroundColor: 'transparent'
+                 backgroundColor: 'transparent' // transparent background
               };
+
               var title = {
                  text: ''
               };
+
               var tooltip = {
-                 pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+                 pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'  // percentages set to two decimal points
               };
+
               var plotOptions = {
                  pie: {
                     allowPointSelect: true,
@@ -1140,9 +1157,13 @@
                     }
                  }
               };
+
               var series = [{
                  type: 'pie',
                  name: 'Share of exports',
+
+                 // create slices of the pie, using the data we got from csvdata.js
+
                  data: [
                     ['Services',   parseFloat(firstNationData[0])],
                     ['Textiles',       textiles],
@@ -1158,26 +1179,46 @@
                  ]
               }];
 
+              // make the pie chart
+
               var json = {};
               json.chart = chart;
               json.title = title;
               json.tooltip = tooltip;
               json.plotOptions = plotOptions;
               json.series = series;
+
+              // push to the browser
+
               $('#container').highcharts(json);
             }
 
-            afunction();
+            afunction();    // call the async function
           })
 
+          // Any other parts of the script or any other script that creates a
+          // new pie chart uses the exact same format. Future pie chart
+          // creations won't be documented in detail to prevent repetition.
+
+          /**
+          * Function for checking if the user clicks the import/export button.
+          */
           $(".import-button").click(function(e){
             e.preventDefault();
-            if($(".import-button").html() === "Exports")
+            if($(".import-button").html() === "Exports")  // if the pie charts are currently set to exports when the user clicks the button
             {
+              // switch to imports
+
               $(".import-button").html("Imports");
               $("#export-makeup").html("Latest Import Makeup Data (2018)") ;
               $("#export-makeup2").html("Latest Import Makeup Data (2018)") ;
+
               $.getScript("csvdata.js", function(e) {
+
+                /**
+                * Async wrapper function that gets import makeup data for
+                * first country.
+                */
                 async function afunction()
                 {
                   firstNationData = await getData("csv/What did " + localStorage.getItem("country1") + " import in 2018_.csv") ;
@@ -1212,12 +1253,15 @@
                      },
                      backgroundColor: 'transparent'
                   };
+
                   var title = {
                      text: ''
                   };
+
                   var tooltip = {
                      pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
                   };
+
                   var plotOptions = {
                      pie: {
                         allowPointSelect: true,
@@ -1230,6 +1274,7 @@
                         }
                      }
                   };
+
                   var series = [{
                      type: 'pie',
                      name: 'Share of imports',
@@ -1257,20 +1302,24 @@
                   $('#container').highcharts(json);
                 }
 
+                /**
+                * Async wrapper function that gets import makeup data for
+                * second country.
+                */
                 async function afunction2()
                 {
-                  firstNationData = await getData("csv/What did " + localStorage.getItem("country2") + " import in 2018_.csv") ;
-                  services = parseFloat(firstNationData[0]) ;
-                  textiles = parseFloat(firstNationData[1]) ;
-                  agriculture = parseFloat(firstNationData[2]) ;
-                  stone = parseFloat(firstNationData[3]) ;
-                  minerals = parseFloat(firstNationData[4]) ;
-                  metals = parseFloat(firstNationData[5]) ;
-                  chemicals = parseFloat(firstNationData[6]) ;
-                  vehhicles = parseFloat(firstNationData[7]) ;
-                  machinery = parseFloat(firstNationData[8]) ;
-                  electronics = parseFloat(firstNationData[9]) ;
-                  other = parseFloat(firstNationData[10]) ;
+                  secondNationData = await getData("csv/What did " + localStorage.getItem("country2") + " import in 2018_.csv") ;
+                  services = parseFloat(secondNationData[0]) ;
+                  textiles = parseFloat(secondNationData[1]) ;
+                  agriculture = parseFloat(secondNationData[2]) ;
+                  stone = parseFloat(secondNationData[3]) ;
+                  minerals = parseFloat(secondNationData[4]) ;
+                  metals = parseFloat(secondNationData[5]) ;
+                  chemicals = parseFloat(secondNationData[6]) ;
+                  vehhicles = parseFloat(secondNationData[7]) ;
+                  machinery = parseFloat(secondNationData[8]) ;
+                  electronics = parseFloat(secondNationData[9]) ;
+                  other = parseFloat(secondNationData[10]) ;
 
                   Highcharts.setOptions({
                    colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
@@ -1291,12 +1340,15 @@
                      },
                      backgroundColor: 'transparent'
                   };
+
                   var title = {
                      text: ''
                   };
+
                   var tooltip = {
                      pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
                   };
+
                   var plotOptions = {
                      pie: {
                         allowPointSelect: true,
@@ -1309,18 +1361,19 @@
                         }
                      }
                   };
+
                   var series = [{
                      type: 'pie',
                      name: 'Share of imports',
                      data: [
-                        ['Services',   parseFloat(firstNationData[0])],
+                        ['Services',   parseFloat(secondNationData[0])],
                         ['Textiles',       textiles],
                         ['Agriculture',       agriculture],
                         ['Stone',       stone],
                         ['Minerals',       minerals],
                         ['Metals',       metals],
                         ['Chemicals',       chemicals],
-                        ['Vehicles',       parseFloat(firstNationData[7])],
+                        ['Vehicles',       parseFloat(secondNationData[7])],
                         ['Machinery',       machinery],
                         ['Electronics',       electronics],
                         ['Other',       other],
@@ -1343,10 +1396,17 @@
 
             else
             {
+              // switch back to export makeup if user clicks button when import makeup is currently showing
+
               $(".import-button").html("Exports");
               $("#export-makeup").html("Latest Export Makeup Data (2018)") ;
               $("#export-makeup2").html("Latest Export Makeup Data (2018)") ;
               $.getScript("csvdata.js", function(e) {
+
+                /**
+                * Async wrapper function that gets export makeup data for
+                * first country.
+                */
                 async function afunction()
                 {
                   firstNationData = await getData("csv/What did " + localStorage.getItem("country1") + " export in 2018_.csv") ;
@@ -1426,20 +1486,24 @@
                   $('#container').highcharts(json);
                 }
 
+                /**
+                * Async wrapper function that gets export makeup data for
+                * second country.
+                */
                 async function afunction2()
                 {
-                  firstNationData = await getData("csv/What did " + localStorage.getItem("country2") + " export in 2018_.csv") ;
-                  services = parseFloat(firstNationData[0]) ;
-                  textiles = parseFloat(firstNationData[1]) ;
-                  agriculture = parseFloat(firstNationData[2]) ;
-                  stone = parseFloat(firstNationData[3]) ;
-                  minerals = parseFloat(firstNationData[4]) ;
-                  metals = parseFloat(firstNationData[5]) ;
-                  chemicals = parseFloat(firstNationData[6]) ;
-                  vehhicles = parseFloat(firstNationData[7]) ;
-                  machinery = parseFloat(firstNationData[8]) ;
-                  electronics = parseFloat(firstNationData[9]) ;
-                  other = parseFloat(firstNationData[10]) ;
+                  secondNationData = await getData("csv/What did " + localStorage.getItem("country2") + " export in 2018_.csv") ;
+                  services = parseFloat(secondNationData[0]) ;
+                  textiles = parseFloat(secondNationData[1]) ;
+                  agriculture = parseFloat(secondNationData[2]) ;
+                  stone = parseFloat(secondNationData[3]) ;
+                  minerals = parseFloat(secondNationData[4]) ;
+                  metals = parseFloat(secondNationData[5]) ;
+                  chemicals = parseFloat(secondNationData[6]) ;
+                  vehhicles = parseFloat(secondNationData[7]) ;
+                  machinery = parseFloat(secondNationData[8]) ;
+                  electronics = parseFloat(secondNationData[9]) ;
+                  other = parseFloat(secondNationData[10]) ;
 
                   Highcharts.setOptions({
                    colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
@@ -1482,14 +1546,14 @@
                      type: 'pie',
                      name: 'Share of exports',
                      data: [
-                        ['Services',   parseFloat(firstNationData[0])],
+                        ['Services',   parseFloat(secondNationData[0])],
                         ['Textiles',       textiles],
                         ['Agriculture',       agriculture],
                         ['Stone',       stone],
                         ['Minerals',       minerals],
                         ['Metals',       metals],
                         ['Chemicals',       chemicals],
-                        ['Vehicles',       parseFloat(firstNationData[7])],
+                        ['Vehicles',       parseFloat(secondNationData[7])],
                         ['Machinery',       machinery],
                         ['Electronics',       electronics],
                         ['Other',       other],
@@ -1513,12 +1577,17 @@
        });
     </script>
     <script language = "JavaScript">
+
+       /**
+       * Script for automatically displaying the export makeup data of the
+       * second country when the user switches to this html page.
+       */
        $(document).ready(function() {
           var Highcharts = require('highcharts');
           require('highcharts/modules/exporting')(Highcharts);
           require('highcharts/highcharts-3d')(Highcharts);
 
-          var firstNationData;
+          var secondNationData;
           var services = 0.0 ;
           var textiles = 0.0 ;
           var agriculture = 0.0 ;
@@ -1532,20 +1601,25 @@
           var other = 0.0 ;
 
           $.getScript("csvdata.js", function(e) {
+
+            /**
+            * Async wrapper function that gets export makeup data for
+            * second country.
+            */
             async function afunction()
             {
-              firstNationData = await getData("csv/What did " + localStorage.getItem("country2") + " export in 2018_.csv") ;
-              services = parseFloat(firstNationData[0]) ;
-              textiles = parseFloat(firstNationData[1]) ;
-              agriculture = parseFloat(firstNationData[2]) ;
-              stone = parseFloat(firstNationData[3]) ;
-              minerals = parseFloat(firstNationData[4]) ;
-              metals = parseFloat(firstNationData[5]) ;
-              chemicals = parseFloat(firstNationData[6]) ;
-              vehhicles = parseFloat(firstNationData[7]) ;
-              machinery = parseFloat(firstNationData[8]) ;
-              electronics = parseFloat(firstNationData[9]) ;
-              other = parseFloat(firstNationData[10]) ;
+              secondNationData = await getData("csv/What did " + localStorage.getItem("country2") + " export in 2018_.csv") ;
+              services = parseFloat(secondNationData[0]) ;
+              textiles = parseFloat(secondNationData[1]) ;
+              agriculture = parseFloat(secondNationData[2]) ;
+              stone = parseFloat(secondNationData[3]) ;
+              minerals = parseFloat(secondNationData[4]) ;
+              metals = parseFloat(secondNationData[5]) ;
+              chemicals = parseFloat(secondNationData[6]) ;
+              vehhicles = parseFloat(secondNationData[7]) ;
+              machinery = parseFloat(secondNationData[8]) ;
+              electronics = parseFloat(secondNationData[9]) ;
+              other = parseFloat(secondNationData[10]) ;
 
               Highcharts.setOptions({
                colors: ['#B23D6D', '#7DDAA1', '#F5CF23', '#CCA570', '#BA8677', '#D86565', '#C270D8', '#8C7CD6', '#6A98D8', '#6AD8D8', '#2C6582'],
@@ -1588,14 +1662,14 @@
                  type: 'pie',
                  name: 'Share of exports',
                  data: [
-                    ['Services',   parseFloat(firstNationData[0])],
+                    ['Services',   parseFloat(secondNationData[0])],
                     ['Textiles',       textiles],
                     ['Agriculture',       agriculture],
                     ['Stone',       stone],
                     ['Minerals',       minerals],
                     ['Metals',       metals],
                     ['Chemicals',       chemicals],
-                    ['Vehicles',       parseFloat(firstNationData[7])],
+                    ['Vehicles',       parseFloat(secondNationData[7])],
                     ['Machinery',       machinery],
                     ['Electronics',       electronics],
                     ['Other',       other],
