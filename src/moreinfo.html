@@ -1,3 +1,5 @@
+<!-- Economic measurements page, page user sees after clicking the 'next' button on datapage.html -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -483,54 +485,83 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
-        var select      = $(".input-box-one");
-        var select2     = $('.input-box-two');
+        var select      = $(".input-box-one");  // left select input box
+        var select2     = $('.input-box-two');  // right select input box
 
+        /**
+        * Function for changing the way the arrow within the left select element
+        * input box is pointing (either up or down) whenever the user clicks it.
+        */
         $(select).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow");
         })
 
+        /**
+        * Same as function above, just with right select element.
+        */
         $(select2).click(function(e){
           e.preventDefault();
           $(this).toggleClass("drop-down-arrow2");
         })
 
+        /**
+        * Compare button function for error prevention.
+        */
         $(".compare-button").on('click', function(e){
           e.preventDefault();
+
+          // if user hasn't entered in one or more countries as input
           if ($("#country").val() === "" || $("#country2").val() === "")
           {
             console.log("error");
           }
 
+          // if user tries to compare the same country
           else if ($("#country").val() === $("#country2").val())
           {
             console.log("error");
           }
 
           else {
-            localStorage.clear()
+            localStorage.clear()      // clear local storage
+
+            // Retrieve important items, such as country names and their ISO
+            // 2-letter ID's and store them in local storage.
+
             localStorage.setItem("country1", $("#country").val())
             localStorage.setItem("country2", $("#country2").val())
             localStorage.setItem("id1", $("#country option:selected").attr('id'))
             localStorage.setItem("id2", $("#country2 option:selected").attr('id'))
-            window.location.href = "moreinfo.html";
+            window.location.href = "moreinfo.html";   // stay on this page
           }
         })
 
+        /**
+        * Function if user clicks the 'back' button on this page.
+        */
         $(".moreinfo-button").click(function(e){
           e.preventDefault();
-          window.location.href = "datapage.html";
+          window.location.href = "datapage.html";   // go back to export/import makeup page
         })
     });
     </script>
     <script>
+
+    /**
+    * Script for retrieving and displaying the names of the countries to the browser.
+    */
     $(document).ready(function() {
         var firstCountryName = localStorage.getItem("country1")
         var secondCountryName = localStorage.getItem("country2")
 
+        // push country names to browser
+
         $("#country-name1").html(firstCountryName);
         $("#country-name2").html(secondCountryName);
+
+        // DR of the Congo is too long of a name and can ruin the look of the
+        // UI, but these if statements solve the issue.
 
         if (firstCountryName === "Democratic Republic of the Congo")
         {
@@ -865,73 +896,129 @@
       <h1 id="mostfrom2">Loading...</h1>
     </div>
     <script>
-      $.getScript("transfer.js", function(e) {
-        async function afunction()
-        {
-          firstNationGDP = await getGDP(localStorage.getItem("country1")) ;
-          secondNationGDP = await getGDP(localStorage.getItem("country2")) ;
 
-          $("#GDP1").html("$" + firstNationGDP + " (2020 est.)");
-          $("#GDP2").html("$" + secondNationGDP + " (2020 est.)");
-        }
+      /**
+      * Script for getting the different pieces of data to present for both
+      * countries.
+      */
+      $(document).ready(function() {
+        $.getScript("transfer.js", function(e) {    // open transfer.js script
 
-        afunction();
+          /**
+          * Async wrapper function to retrieve GDP data and push to the browser
+          * for both countries.
+          */
+          async function afunction()
+          {
+            // get data
 
-        async function afunction2()
-        {
-          firstNationGDPC = await getGDPC(localStorage.getItem("country1")) ;
-          secondNationGDPC = await getGDPC(localStorage.getItem("country2")) ;
+            firstNationGDP = await getGDP(localStorage.getItem("country1")) ;
+            secondNationGDP = await getGDP(localStorage.getItem("country2")) ;
 
-          $("#GDP-capita1").html("$" + firstNationGDPC + " (2020 est.)");
-          $("#GDP-capita2").html("$" + secondNationGDPC + " (2020 est.)");
-        }
+            // push to browser
 
-        afunction2();
+            $("#GDP1").html("$" + firstNationGDP + " (2020 est.)");
+            $("#GDP2").html("$" + secondNationGDP + " (2020 est.)");
+          }
 
-        async function afunction3()
-        {
-          firstNationExports = await ExportMoney(localStorage.getItem("country1")) ;
-          secondNationExports = await ExportMoney(localStorage.getItem("country2")) ;
+          afunction();
 
-          $("#exports1").html("$" + firstNationExports + " (2019)");
-          $("#exports2").html("$" + secondNationExports + " (2019)");
-        }
+          /**
+          * Async wrapper function to retrieve GDP per capita data and push to the browser
+          * for both countries.
+          */
+          async function afunction2()
+          {
+            // get data
 
-        afunction3();
+            firstNationGDPC = await getGDPC(localStorage.getItem("country1")) ;
+            secondNationGDPC = await getGDPC(localStorage.getItem("country2")) ;
 
-        async function afunction4()
-        {
-          firstNationImports = await ImportMoney(localStorage.getItem("country1")) ;
-          secondNationImports = await ImportMoney(localStorage.getItem("country2")) ;
+            // push to browser
 
-          $("#imports1").html("$" + firstNationImports + " (2019)");
-          $("#imports2").html("$" + secondNationImports + " (2019)");
-        }
+            $("#GDP-capita1").html("$" + firstNationGDPC + " (2020 est.)");
+            $("#GDP-capita2").html("$" + secondNationGDPC + " (2020 est.)");
+          }
 
-        afunction4();
+          afunction2();
 
-        async function afunction5()
-        {
-          firstNationExport = await ExportPartner(localStorage.getItem("country1")) ;
-          secondNationExport = await ExportPartner(localStorage.getItem("country2")) ;
+          /**
+          * Async wrapper function to retrieve export value data and push to the browser
+          * for both countries.
+          */
+          async function afunction3()
+          {
+            // get data
 
-          $("#mostto1").html(firstNationExport);
-          $("#mostto2").html(secondNationExport);
-        }
+            firstNationExports = await ExportMoney(localStorage.getItem("country1")) ;
+            secondNationExports = await ExportMoney(localStorage.getItem("country2")) ;
 
-        afunction5();
+            // push to browser
 
-        async function afunction6()
-        {
-          firstNationImport = await ImportPartner(localStorage.getItem("country1")) ;
-          secondNationImport = await ImportPartner(localStorage.getItem("country2")) ;
+            $("#exports1").html("$" + firstNationExports + " (2019)");
+            $("#exports2").html("$" + secondNationExports + " (2019)");
+          }
 
-          $("#mostfrom1").html(firstNationImport);
-          $("#mostfrom2").html(secondNationImport);
-        }
+          afunction3();
 
-        afunction6();
-      })
+          /**
+          * Async wrapper function to retrieve export value data and push to the browser
+          * for both countries.
+          */
+          async function afunction4()
+          {
+            // get data
+
+            firstNationImports = await ImportMoney(localStorage.getItem("country1")) ;
+            secondNationImports = await ImportMoney(localStorage.getItem("country2")) ;
+
+            // push to browser
+
+            $("#imports1").html("$" + firstNationImports + " (2019)");
+            $("#imports2").html("$" + secondNationImports + " (2019)");
+          }
+
+          afunction4();
+
+          /**
+          * Async wrapper function to retrieve the places where both countries
+          * export to the most, then push that data to the browser.
+          */
+          async function afunction5()
+          {
+            // get data
+
+            firstNationExport = await ExportPartner(localStorage.getItem("country1")) ;
+            secondNationExport = await ExportPartner(localStorage.getItem("country2")) ;
+
+            // push to browser
+
+            $("#mostto1").html(firstNationExport);
+            $("#mostto2").html(secondNationExport);
+          }
+
+          afunction5();
+
+          /**
+          * Async wrapper function to retrieve the places where both countries
+          * import from the most, then push that data to the browser.
+          */
+          async function afunction6()
+          {
+            // get data
+
+            firstNationImport = await ImportPartner(localStorage.getItem("country1")) ;
+            secondNationImport = await ImportPartner(localStorage.getItem("country2")) ;
+
+            // push to browser
+
+            $("#mostfrom1").html(firstNationImport);
+            $("#mostfrom2").html(secondNationImport);
+          }
+
+          afunction6();
+        })
+      });
     </script>
   </body>
 </html>
