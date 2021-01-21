@@ -23,8 +23,27 @@ const createWindow = () => {
 
   mainWindow.maximize()
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // adjusts zoom factor of application based on popularly used screen
+  // resolutions, specifically 1920x1080, 1536x864, and 1366x768.
+  const { screen } = require('electron');
+
+  let webContents = mainWindow.webContents;
+  webContents.on('did-finish-load', () => {
+    if (screen.getPrimaryDisplay().workAreaSize.width == 1920)
+    {
+      webContents.setZoomFactor(1.0);
+    }
+
+    else if (screen.getPrimaryDisplay().workAreaSize.width == 1536)
+    {
+      webContents.setZoomFactor(0.799);
+    }
+
+    else if (screen.getPrimaryDisplay().workAreaSize.width == 1366)
+    {
+      webContents.setZoomFactor(0.705)
+    }
+  })
 };
 
 // This method will be called when Electron has finished
