@@ -133,6 +133,7 @@ async function getGDP(country)
 
   var countryName;                // to store the selector of a country name from the url's HTML data
   var grossDomProduct;            // to store GDP data of a country
+  var found = false ;             // value incase a nation is not found in the url's table
 
   // Again, error prevention for minor word/letter discrepencies between the
   // country the user selected and how the country is referenced in the url.
@@ -175,6 +176,7 @@ async function getGDP(country)
       // retrieve the GDP data from this table's index
 
       grossDomProduct = $($('#mw-content-text > div.mw-parser-output > table.wikitable > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(3)')).text().trim();
+      found = true ;
       break;
     }
   }
@@ -183,6 +185,11 @@ async function getGDP(country)
   // as of right now, so it will get the GDP value of N/A.
 
   if (country === "Syria")
+  {
+    grossDomProduct = "N/A";
+  }
+
+  if (found == false)
   {
     grossDomProduct = "N/A";
   }
@@ -207,6 +214,7 @@ async function getGDPC(country)
 
   var countryName ;               // to store the selector of a country name from the url's HTML data
   var grossDomCapita;             // to store GDP per capita data of a country
+  var found = false ;             // value incase a nation is not found in the url's table
 
   // Error prevention for minor word/letter discrepencies between the
   // country the user selected and how the country is referenced in the url.
@@ -249,8 +257,14 @@ async function getGDPC(country)
       // retrieve the GDP per capita data from this table's index
 
       grossDomCapita = $($('#mw-content-text > div.mw-parser-output > table > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(' + i + ') > td:nth-child(3)')).text().trim();
+      found = true ;
       break;
     }
+  }
+
+  if (found == false)
+  {
+    grossDomCapita = "N/A";
   }
 
   // return the GDP per capita of a country
@@ -406,7 +420,7 @@ async function ExportPartner(country)
     country = "Swaziland";
   }
 
-  for (var i = 1; i <= 194; i++)
+  for (var i = 1; i <= 203; i++)
   {
     countryName = $('#mw-content-text > div.mw-parser-output > table:nth-child(9) > tbody > tr:nth-child(' + i + ') > td:nth-child(1) > a');
     $name = cheerio.text($(countryName));
@@ -466,7 +480,7 @@ async function ImportPartner(country)
     country = "Swaziland";
   }
 
-  for (var i = 1; i <= 194; i++)
+  for (var i = 1; i <= 203; i++)
   {
     countryName = $('#mw-content-text > div.mw-parser-output > table:nth-child(9) > tbody > tr:nth-child(' + i + ') > td:nth-child(1) > a');
     $name = cheerio.text($(countryName));
