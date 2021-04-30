@@ -6,6 +6,3 @@ Its purpose is to show users the item makeup of exports and imports of most coun
 show data on basic economic measurements for these countries, such as GDP, GDP per capita, etc.
 
 This app was made with help from API's like Axios, Cheerio, and HighCharts. In addition, the data used in this application was taken from Wikipedia and also from Harvard University's Atlas of Economic Complexity.
-
-YouTube link to brief demo of the app:
-https://www.youtube.com/watch?v=0-Y4FDRQAAc
